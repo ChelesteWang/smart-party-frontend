@@ -53,7 +53,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
         //   //console.log('input', value);
         // }}
       />
-      <Tooltip title="使用文档">
+      {/* <Tooltip title="使用文档">
         <a
           style={{
             color: 'inherit',
@@ -65,7 +65,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
         >
           <QuestionCircleOutlined />
         </a>
-      </Tooltip>
+      </Tooltip> */}
       <Avatar />
       {REACT_APP_ENV && (
         <span>

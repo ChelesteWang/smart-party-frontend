@@ -5,15 +5,15 @@ type DefaultSettings = Partial<ProSettings> & {
 };
 
 const proSettings: DefaultSettings = {
-  navTheme: 'dark',
+  navTheme: 'light',
   // 薄暮红
   primaryColor: '#ff7875',
   layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
-  colorWeak: false,
-  title: '智慧党建',
+  colorWeak: true,
+  title: '智慧党建系统',
   pwa: false,
   iconfontUrl: '',
 };

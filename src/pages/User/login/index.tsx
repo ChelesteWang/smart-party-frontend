@@ -72,7 +72,7 @@ const Login: React.FC<LoginProps> = (props) => {
           return Promise.resolve();
         }}
       >
-        <Tabs activeKey={type} onChange={setType}>
+        {/* <Tabs activeKey={type} onChange={setType}>
           <Tabs.TabPane
             key="account"
             tab={intl.formatMessage({
@@ -87,13 +87,13 @@ const Login: React.FC<LoginProps> = (props) => {
               defaultMessage: '手机号登录',
             })}
           />
-        </Tabs>
+        </Tabs> */}
 
         {status === 'error' && loginType === 'account' && !submitting && (
           <LoginMessage
             content={intl.formatMessage({
               id: 'pages.login.accountLogin.errorMessage',
-              defaultMessage: '账户或密码错误（admin/ant.design)',
+              defaultMessage: '账户或密码错误',
             })}
           />
         )}
@@ -107,7 +107,7 @@ const Login: React.FC<LoginProps> = (props) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.username.placeholder',
-                defaultMessage: '用户名: admin or user',
+                defaultMessage: '用户名',
               })}
               rules={[
                 {
@@ -115,7 +115,7 @@ const Login: React.FC<LoginProps> = (props) => {
                   message: (
                     <FormattedMessage
                       id="pages.login.username.required"
-                      defaultMessage="请输入用户名!"
+                      defaultMessage="请输入用户名"
                     />
                   ),
                 },
@@ -129,7 +129,7 @@ const Login: React.FC<LoginProps> = (props) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.password.placeholder',
-                defaultMessage: '密码: ant.design',
+                defaultMessage: '密码',
               })}
               rules={[
                 {
@@ -245,12 +245,6 @@ const Login: React.FC<LoginProps> = (props) => {
           </a>
         </div>
       </ProForm>
-      <Space className={styles.other}>
-        <FormattedMessage id="pages.login.loginWith" defaultMessage="其他登录方式" />
-        <AlipayCircleOutlined className={styles.icon} />
-        <TaobaoCircleOutlined className={styles.icon} />
-        <WeiboCircleOutlined className={styles.icon} />
-      </Space>
     </div>
   );
 };

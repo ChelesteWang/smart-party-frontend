@@ -56,6 +56,12 @@
                 component: './TableList',
               },
               {
+                name: 'advanced-form',
+                icon: 'table',
+                path: '/advanced-form',
+                component: './advanced-form',
+              },
+              {
                 component: './404',
               },
             ],
