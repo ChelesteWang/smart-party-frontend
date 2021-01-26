@@ -28,38 +28,34 @@
                 redirect: '/welcome',
               },
               {
-                path: '/welcome',
-                name: 'welcome',
-                icon: 'smile',
-                component: './Welcome',
-              },
-              {
-                path: '/admin',
-                name: 'admin',
-                icon: 'crown',
-                component: './Admin',
-                authority: ['admin'],
-                routes: [
-                  {
-                    path: '/admin/sub-page',
-                    name: 'sub-page',
-                    icon: 'smile',
-                    component: './Welcome',
-                    authority: ['admin'],
-                  },
-                ],
-              },
-              {
-                name: 'list.table-list',
+                name: '事件处理',
                 icon: 'table',
                 path: '/list',
                 component: './TableList',
               },
               {
-                name: 'advanced-form',
+                name: '添加党员',
+                icon: 'table',
+                path: 'basic-form',
+                component: './basic-form',
+              },
+              {
+                name: '添加党组织',
+                icon: 'table',
+                path: 'partyBranch',
+                component: './partyBranch',
+              },
+              {
+                name: '添加事件',
                 icon: 'table',
                 path: '/advanced-form',
                 component: './advanced-form',
+              },
+              {
+                name: '详情页',
+                icon: 'table',
+                path: '/basic',
+                component: './basic',
               },
               {
                 component: './404',
