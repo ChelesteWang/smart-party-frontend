@@ -57,7 +57,7 @@ const BasicForm2: FC<BasicFormProps> = (props) => {
   };
 
   return (
-    <PageContainer content={<FormattedMessage id="formandbasic-form.basic.description" />}>
+    <PageContainer content='用于添加党支部的基本信息'>
       <Card bordered={false}>
         <Form
           hideRequiredMark

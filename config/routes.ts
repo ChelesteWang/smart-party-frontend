@@ -52,7 +52,7 @@
                 component: './advanced-form',
               },
               {
-                name: '详情页',
+                name: '党员详情页',
                 icon: 'table',
                 path: '/basic',
                 component: './basic',

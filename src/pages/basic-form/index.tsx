@@ -68,7 +68,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
   }
 
   return (
-    <PageContainer content={<FormattedMessage id="formandbasic-form.basic.description" />}>
+    <PageContainer content='用于添加支部党员的基本信息'>
       <Card bordered={false}>
         <Form
           hideRequiredMark
@@ -236,7 +236,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
           </Col>
           </Row>
           
-          {/* 这个是自己填写还是从后端获取 */}
+          {/* 这个是自己填写还是从后端获取（初始值为0） */}
           <Row>
           {/* <Col span={8}> */}
           {/* <FormItem

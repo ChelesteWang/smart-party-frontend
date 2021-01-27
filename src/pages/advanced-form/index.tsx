@@ -201,7 +201,7 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
             </Col>
           </Row>
         </Card>
-        <Card title="任务管理" className={styles.card} bordered={false}>
+        {/* <Card title="任务管理（审批人）" className={styles.card} bordered={false}>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <Form.Item
@@ -278,7 +278,7 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
               </Form.Item>
             </Col>
           </Row>
-        </Card>
+        </Card> */}
         <Card title="参会人员" bordered={false}>
           <Form.Item name="members">
             <TableForm />
