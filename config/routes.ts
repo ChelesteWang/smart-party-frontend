@@ -48,7 +48,7 @@
               {
                 name: '添加事件',
                 icon: 'table',
-                path: '/advanced-form',
+                path: 'advanced-form',
                 component: './advanced-form',
               },
               {
@@ -56,6 +56,12 @@
                 icon: 'table',
                 path: '/basic',
                 component: './basic',
+              },
+              {
+                name: '组织构成',
+                icon: 'table',
+                path: 'tree',
+                component: './tree',
               },
               {
                 component: './404',
