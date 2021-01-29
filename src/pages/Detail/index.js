@@ -10,11 +10,10 @@ import './style.css'
 import Ring from './Ring'
 import Score from './score'
 import Detail from './detail'
-
+import { Card } from 'antd';
 export default function () {
   const ref = React.useRef(null)
   let graph = null
-
   G6.registerNode(
     'icon-node',
     {
