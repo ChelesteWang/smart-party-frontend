@@ -229,7 +229,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
                 </em>
               </span>
             }
-            name="date"
+            name="positiveDate"
           >
             <DatePicker defaultPickerValue={moment('20210101', dateFormat)} onChange={birthChange} placeholder="请选择转正时间" style={{ width: 160 }}/>
           </FormItem>

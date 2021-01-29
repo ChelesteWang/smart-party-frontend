@@ -56,10 +56,14 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
     if (publicType) setShowPublicUsers(publicType === '2');
   };
 
+  const handleChange = (value:String) => {
+    console.log(`selected ${value}`);
+  }
+
   return (
     <PageContainer content={<FormattedMessage id="formandbasic-form.basic.description" />}>
       <Card bordered={false}>
-        <Form
+      <Form
           hideRequiredMark
           style={{ marginTop: 8 }}
           form={form}
@@ -71,159 +75,64 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
         >
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.title.label" />}
-            name="title"
+            label={<FormattedMessage id="党组织名称" />}
+            name="name"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.title.required' }),
+                message: "请输入党组织名称",
               },
             ]}
           >
-            <Input placeholder={formatMessage({ id: 'formandbasic-form.title.placeholder' })} />
+            <Input placeholder="请输入党组织名称" style={{ width: 160 }}/>
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.date.label" />}
-            name="date"
+            label={<FormattedMessage id="组织属性" />}
+            name="sex"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.date.required' }),
               },
             ]}
           >
-            <RangePicker
-              style={{ width: '100%' }}
-              placeholder={[
-                formatMessage({ id: 'formandbasic-form.placeholder.start' }),
-                formatMessage({ id: 'formandbasic-form.placeholder.end' }),
-              ]}
-            />
+            <Select defaultValue="dangwei" style={{ width: 160 }} onChange={handleChange}>
+              <Option value="dangwei">党委</Option>
+              <Option value="zongzhi">总支</Option>
+              <Option value="zhibu">支部</Option>
+            </Select>
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.goal.label" />}
-            name="goal"
+            label={<FormattedMessage id="单位属性" />}
+            name="sex"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.goal.required' }),
               },
             ]}
           >
-            <TextArea
-              style={{ minHeight: 32 }}
-              placeholder={formatMessage({ id: 'formandbasic-form.goal.placeholder' })}
-              rows={4}
-            />
+            <Select defaultValue="commonUni" style={{ width: 160 }} onChange={handleChange}>
+              <Option value="commonUni">普通高校</Option>
+              {/* <Option value="zongzhi">总支</Option>
+              <Option value="zhibu">支部</Option> */}
+            </Select>
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.standard.label" />}
-            name="standard"
+            label={<FormattedMessage id="所属行业" />}
+            name="sex"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.standard.required' }),
               },
             ]}
           >
-            <TextArea
-              style={{ minHeight: 32 }}
-              placeholder={formatMessage({ id: 'formandbasic-form.standard.placeholder' })}
-              rows={4}
-            />
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label={
-              <span>
-                <FormattedMessage id="formandbasic-form.client.label" />
-                <em className={styles.optional}>
-                  <FormattedMessage id="formandbasic-form.form.optional" />
-                  <Tooltip title={<FormattedMessage id="formandbasic-form.label.tooltip" />}>
-                    <InfoCircleOutlined style={{ marginRight: 4 }} />
-                  </Tooltip>
-                </em>
-              </span>
-            }
-            name="client"
-          >
-            <Input placeholder={formatMessage({ id: 'formandbasic-form.client.placeholder' })} />
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label={
-              <span>
-                <FormattedMessage id="formandbasic-form.invites.label" />
-                <em className={styles.optional}>
-                  <FormattedMessage id="formandbasic-form.form.optional" />
-                </em>
-              </span>
-            }
-            name="invites"
-          >
-            <Input placeholder={formatMessage({ id: 'formandbasic-form.invites.placeholder' })} />
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label={
-              <span>
-                <FormattedMessage id="formandbasic-form.weight.label" />
-                <em className={styles.optional}>
-                  <FormattedMessage id="formandbasic-form.form.optional" />
-                </em>
-              </span>
-            }
-            name="weight"
-          >
-            <InputNumber
-              placeholder={formatMessage({ id: 'formandbasic-form.weight.placeholder' })}
-              min={0}
-              max={100}
-            />
-            <span className="ant-form-text">%</span>
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.public.label" />}
-            help={<FormattedMessage id="formandbasic-form.label.help" />}
-            name="publicType"
-          >
-            <div>
-              <Radio.Group>
-                <Radio value="1">
-                  <FormattedMessage id="formandbasic-form.radio.public" />
-                </Radio>
-                <Radio value="2">
-                  <FormattedMessage id="formandbasic-form.radio.partially-public" />
-                </Radio>
-                <Radio value="3">
-                  <FormattedMessage id="formandbasic-form.radio.private" />
-                </Radio>
-              </Radio.Group>
-              <FormItem style={{ marginBottom: 0 }} name="publicUsers">
-                <Select
-                  mode="multiple"
-                  placeholder={formatMessage({ id: 'formandbasic-form.publicUsers.placeholder' })}
-                  style={{
-                    margin: '8px 0',
-                    display: showPublicUsers ? 'block' : 'none',
-                  }}
-                >
-                  <Option value="1">
-                    <FormattedMessage id="formandbasic-form.option.A" />
-                  </Option>
-                  <Option value="2">
-                    <FormattedMessage id="formandbasic-form.option.B" />
-                  </Option>
-                  <Option value="3">
-                    <FormattedMessage id="formandbasic-form.option.C" />
-                  </Option>
-                </Select>
-              </FormItem>
-            </div>
+            <Select defaultValue="commonEdu" style={{ width: 160 }} onChange={handleChange}>
+              <Option value="commonEdu">普通高等教育</Option>
+              {/* <Option value="zongzhi">总支</Option>
+              <Option value="zhibu">支部</Option> */}
+            </Select>
           </FormItem>
           <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
             <Button type="primary" htmlType="submit" loading={submitting}>
