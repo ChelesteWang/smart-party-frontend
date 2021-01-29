@@ -31,20 +31,21 @@
 
 .detail {
   float: left;
+  margin-left: 10px;
 }
 
 .container {
   /* border: 1px solid #cccccc; */
   float: left;
   margin-top: 15px;
-  margin-left: 30px;
+  margin-left: 25px;
   padding: 10px;
   padding-bottom: 20px;
-  background-color: #fff;
+  color: #ff7875;
   font-weight: 500;
   font-size: 28px;
   text-align: center;
-  color: #ff7875;
+  background-color: #fff;
   /* border: 1px solid #cccccc; */
   border-radius: 10px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);

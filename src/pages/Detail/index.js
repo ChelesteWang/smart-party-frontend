@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useEffect, useState } from 'react';
+import { Card } from 'antd'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ReactDOM from 'react-dom';
 import G6 from '@antv/g6';
@@ -139,7 +140,7 @@ export default function () {
 
   const defaultLabelCfg = {
     style: {
-      fill: '#000',
+      fill: '#fff',
       fontSize: 12,
     },
   };
@@ -214,30 +215,33 @@ export default function () {
 
   return (
     <div>
-      <div className='ring'><p className='title'>转正率</p><Ring
-        data={myData}
-        content={myContent}
-      />
-      </div>
-      <div className='ring' style={{ marginLeft: 100 }}><p className='title'>师生党员占比</p><Ring
-        data={myData1}
-        content={myContent1}
-        intervalConfig={{
-          style: { fillOpacity: 0.6 },
-          size: [
-            "type",
-            (type) => {
-              return type === "已完成" ? 12 : 6;
-            },
-          ],
-        }}
-      />
-      </div>
-      <Detail></Detail>
-      <br style={{ clear: 'both', }} />
-      <div className='score'><p className='title'>积分统计图</p><Score></Score></div>
-      <div ><p className='title'>党组织结构图</p>
-        <div className='g6' ref={ref} /></div>
+      <Card>
+        <div className='ring'><p className='title'>转正率</p><Ring
+          data={myData}
+          content={myContent}
+        />
+        </div>
+        <div className='ring' style={{ marginLeft: 50 }}><p className='title'>师生党员占比</p><Ring
+          data={myData1}
+          content={myContent1}
+          intervalConfig={{
+            style: { fillOpacity: 0.6 },
+            size: [
+              "type",
+              (type) => {
+                return type === "已完成" ? 12 : 6;
+              },
+            ],
+          }}
+        />
+        </div>
+        <Detail></Detail>
+        <br style={{ clear: 'both', }} />
+        <div className='score'><p className='title'>积分统计图</p><Score></Score></div>
+        <div ><p className='title'>党组织结构图</p>
+          <div className='g6' ref={ref} />
+        </div>
+      </Card >
     </div>
   );
 }
