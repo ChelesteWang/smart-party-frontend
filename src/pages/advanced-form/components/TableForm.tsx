@@ -174,7 +174,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
       },
     },
     {
-      title: '所属部门',
+      title: '所属支部',
       dataIndex: 'department',
       key: 'department',
       width: '40%',
@@ -221,8 +221,6 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
         }
         return (
           <span>
-            <a onClick={(e) => toggleEditable(e, record.key)}>编辑</a>
-            <Divider type="vertical" />
             <Popconfirm title="是否要删除此行？" onConfirm={() => remove(record.key)}>
               <a>删除</a>
             </Popconfirm>
