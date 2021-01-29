@@ -12,7 +12,7 @@ import {
 
 
 function Ring({ data = [], content = {}, intervalConfig = {} }) {
-	const brandFill = getTheme().colors10[0];
+	const brandFill = '#ff7875';
 	return (
 		<Chart placeholder={false} height={200} width={200} padding="auto" autoFit>
 			<Legend visible={false} />
@@ -22,7 +22,7 @@ function Ring({ data = [], content = {}, intervalConfig = {} }) {
 				scale={{
 					percent: {
 						formatter: (val) => {
-							return `${(val * 100).toFixed(2)  }%`;
+							return `${(val * 100).toFixed(2)}%`;
 						},
 					},
 				}}

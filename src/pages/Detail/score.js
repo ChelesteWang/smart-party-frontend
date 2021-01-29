@@ -13,8 +13,8 @@ const data = [
 
 
 function Score() {
-    return <Chart height={300} width={500} autoFit data={data} interactions={['active-region']} padding={[30, 30, 30, 50]} >
-        <Interval position="score*num" />
+    return <Chart height={300} width={500}  autoFit data={data} interactions={['active-region']} padding={[30, 30, 30, 50]} >
+        <Interval position="score*num" color='#ff7875' />
         <Tooltip shared />
     </Chart>
 }
