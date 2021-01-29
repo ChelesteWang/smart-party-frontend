@@ -7,37 +7,53 @@ import { BasicProfileDataType } from './data.d';
 import styles from './style.less';
 
 const progressColumns = [
+  
   {
-    title: '时间',
-    dataIndex: 'time',
-    key: 'time',
+    title: '活动角色',
+    dataIndex: 'role',
+    key: 'role',
   },
-  {
-    title: '当前进度',
-    dataIndex: 'rate',
-    key: 'rate',
-  },
-  {
-    title: '状态',
-    dataIndex: 'status',
-    key: 'status',
-    render: (text: string) => {
-      if (text === 'success') {
-        return <Badge status="success" text="成功" />;
-      }
-      return <Badge status="processing" text="进行中" />;
-    },
-  },
+  // {
+  //   title: '状态',
+  //   dataIndex: 'status',
+  //   key: 'status',
+  //   render: (text: string) => {
+  //     if (text === 'success') {
+  //       return <Badge status="success" text="成功" />;
+  //     }
+  //     return <Badge status="processing" text="进行中" />;
+  //   },
+  // },
 
   {
-    title: '操作员ID',
-    dataIndex: 'operator',
-    key: 'operator',
+    title: '活动类别',
+    dataIndex: 'type',
+    key: 'type',
   },
   {
-    title: '耗时',
+    title: '活动开始时间',
+    dataIndex: 'startTime',
+    key: 'startTime',
+  },
+  {
+    title: '活动结束时间',
+    dataIndex: 'endTime',
+    key: 'endTime',
+  },
+  {
+    title: '活动时长',
     dataIndex: 'cost',
     key: 'cost',
+  },
+  {
+    title: '成绩',
+    dataIndex: 'score',
+    key: 'score',
+  },
+  {
+    title: '备注',
+    dataIndex: 'memo',
+    key: 'memo',
   },
 ];
 
@@ -153,10 +169,17 @@ class Basic extends Component<BasicProps, BasicState> {
       <PageContainer>
         <Card bordered={false}>
           <Descriptions title="党员信息" style={{ marginBottom: 32 }}>
-            <Descriptions.Item label="取货单号">1000000000</Descriptions.Item>
-            <Descriptions.Item label="状态">已取货</Descriptions.Item>
-            <Descriptions.Item label="销售单号">1234123421</Descriptions.Item>
-            <Descriptions.Item label="子订单">3214321432</Descriptions.Item>
+            <Descriptions.Item label="姓名">王大锤</Descriptions.Item>
+            <Descriptions.Item label="性别">男</Descriptions.Item>
+            <Descriptions.Item label="民族">汉</Descriptions.Item>
+            <Descriptions.Item label="班级">1班</Descriptions.Item>
+            <Descriptions.Item label="政治面貌">中共党员</Descriptions.Item>
+            <Descriptions.Item label="联系方式">3214321432</Descriptions.Item>
+            <Descriptions.Item label="出生年月">1996-02-01</Descriptions.Item>
+            <Descriptions.Item label="入党时间">2020-11-01</Descriptions.Item>
+            <Descriptions.Item label="转正时间">2021-11-01</Descriptions.Item>
+            <Descriptions.Item label="所在支部">电子信息教职工支部</Descriptions.Item>
+            <Descriptions.Item label="是否支部委员">是</Descriptions.Item>
           </Descriptions>
           <Divider style={{ marginBottom: 32 }} />
           <div className={styles.title}>相关事件</div>
