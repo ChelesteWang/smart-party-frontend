@@ -19,7 +19,7 @@ function Detail() {
                 <p>44人</p>
             </div>
             <div className='container'>
-                <p>教职工党员</p>
+                <p>教师党员</p>
                 <p>26人</p>
             </div>
         </div>

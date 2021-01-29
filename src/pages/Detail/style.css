@@ -30,13 +30,26 @@
 }
 
 .detail {
-    float: left;
+  float: left;
 }
 
 .container {
-    /* border: 1px solid #cccccc; */
-    float: left;
-    font-size: 32px;
-    margin-left: 45px;
-    margin-top: 30px;
+  /* border: 1px solid #cccccc; */
+  float: left;
+  margin-top: 15px;
+  margin-left: 30px;
+  padding: 10px;
+  padding-bottom: 20px;
+  background-color: #fff;
+  font-weight: 500;
+  font-size: 28px;
+  text-align: center;
+  color: #ff7875;
+  /* border: 1px solid #cccccc; */
+  border-radius: 10px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.container > p {
+  margin: 5px;
 }

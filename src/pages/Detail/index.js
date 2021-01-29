@@ -13,13 +13,14 @@ import Detail from './detail'
 export default function () {
   const ref = React.useRef(null)
   let graph = null
+
   G6.registerNode(
     'icon-node',
     {
       options: {
         size: [60, 20],
-        stroke: '#91d5ff',
-        fill: '#91d5ff',
+        stroke: '#ff7875',
+        fill: '#ff7875',
       },
       draw(cfg, group) {
         const styles = this.getShapeStyle(cfg);
@@ -102,16 +103,16 @@ export default function () {
   };
 
   const defaultNodeStyle = {
-    fill: '#91d5ff',
-    stroke: '#40a9ff',
+    fill: '#ff7875',
+    stroke: '#ff7875',
     radius: 5,
   };
 
   const defaultEdgeStyle = {
-    stroke: '#91d5ff',
+    stroke: '#ff7875',
     endArrow: {
       path: 'M 0,0 L 12, 6 L 9,0 L 12, -6 Z',
-      fill: '#91d5ff',
+      fill: '#ff7875',
       d: -20,
     },
   };
@@ -180,6 +181,7 @@ export default function () {
     graph.render()
     graph.fitView();
   }, [])
+
   const myData = [
     { type: "正式党员", percent: 0.56 },
     { type: "预备党员", percent: 0.3334 },
@@ -237,8 +239,6 @@ export default function () {
       <div ><p className='title'>党组织结构图</p>
         <div className='g6' ref={ref} /></div>
     </div>
-
-
   );
 }
 

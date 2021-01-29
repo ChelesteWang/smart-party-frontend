@@ -2,8 +2,6 @@ import React from "react";
 import {
 	Chart,
 	Interval,
-	Axis,
-	Tooltip,
 	Coordinate,
 	Legend,
 	View,
@@ -75,44 +73,5 @@ function Ring({ data = [], content = {}, intervalConfig = {} }) {
 		</Chart>
 	);
 }
-
-// const myData = [
-// 	{ type: "正式党员", percent: 0.56 },
-// 	{ type: "预备党员", percent: 0.3334 },
-// ];
-
-// const renderContent = (value) => {
-// 	if (value != undefined && value != null) {
-// 		const scale = ((Math.round((value * 10000))) / 100.00).toFixed(2) + '%';
-// 		return scale;
-// 	}
-// };
-
-// const avg = renderContent(myData[0].percent)
-// const myContent = {
-// 	siteCode: "党员概况",
-// 	title: "转正率",
-// 	percent: avg,
-// };
-
-// // ReactDOM.render(
-// // 	<>
-// // 		<Ring data={myData} content={myContent} />
-// // 		<Ring
-// // 			data={myData}
-// // 			content={myContent}
-// // 			intervalConfig={{
-// // 				style: { fillOpacity: 0.6 },
-// // 				size: [
-// // 					"type",
-// // 					(type) => {
-// // 						return type === "已完成" ? 12 : 6;
-// // 					},
-// // 				],
-// // 			}}
-// // 		/>
-// // 	</>,
-// // 	mountNode
-// // );
 
 export default Ring
