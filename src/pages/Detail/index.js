@@ -10,7 +10,7 @@ import './style.css'
 import Ring from './Ring'
 import Score from './score'
 import Detail from './detail'
-import { Card } from 'antd';
+
 export default function () {
   const ref = React.useRef(null)
   let graph = null
@@ -214,30 +214,34 @@ export default function () {
 
   return (
     <div>
+      <div style={{ display: "flex" }}>
+        <Card style={{ flex: 1 }}>
+          <div className='ring'><p className='title'>转正率</p><Ring
+            data={myData}
+            content={myContent}
+          />
+          </div>
+          <div className='ring' style={{ marginLeft: 100 }}><p className='title'>师生党员占比</p><Ring
+            data={myData1}
+            content={myContent1}
+            intervalConfig={{
+              style: { fillOpacity: 0.6 },
+              size: [
+                "type",
+                (type) => {
+                  return type === "已完成" ? 12 : 6;
+                },
+              ],
+            }}
+          />
+          </div>
+        </Card>
+        <Card style={{ flex: 1, marginLeft: 20 }}><Detail></Detail></Card>
+      </div>
+      <br style={{ clear: 'both', }} />
       <Card>
-        <div className='ring'><p className='title'>转正率</p><Ring
-          data={myData}
-          content={myContent}
-        />
-        </div>
-        <div className='ring' style={{ marginLeft: 50 }}><p className='title'>师生党员占比</p><Ring
-          data={myData1}
-          content={myContent1}
-          intervalConfig={{
-            style: { fillOpacity: 0.6 },
-            size: [
-              "type",
-              (type) => {
-                return type === "已完成" ? 12 : 6;
-              },
-            ],
-          }}
-        />
-        </div>
-        <Detail></Detail>
-        <br style={{ clear: 'both', }} />
         <div className='score'><p className='title'>积分统计图</p><Score></Score></div>
-        <div ><p className='title'>党组织结构图</p>
+        <div ><p className='title' style={{textAlign:'center'}}>党组织结构图</p>
           <div className='g6' ref={ref} />
         </div>
       </Card >

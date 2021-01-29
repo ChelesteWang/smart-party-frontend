@@ -6,10 +6,10 @@
   background-size: 10px 10px; */
   /* border: 2px solid #cccccc; */
   float: left;
-  width: 650px;
+  width: 600px;
   height: 300px;
   margin-top: 20px;
-  margin-left: 50px;
+  margin-left: 150px;
 }
 
 .title {
@@ -31,26 +31,30 @@
 
 .detail {
   float: left;
-  margin-left: 10px;
+  margin-left: 25px;
 }
 
 .container {
   /* border: 1px solid #cccccc; */
-  float: left;
+  /* flex: 1; */
+  width: 150px;
+  height: 150px;
   margin-top: 15px;
   margin-left: 25px;
   padding: 10px;
   padding-bottom: 20px;
   color: #ff7875;
   font-weight: 500;
-  font-size: 28px;
+  font-size: 24px;
   text-align: center;
-  background-color: #fff;
-  /* border: 1px solid #cccccc; */
-  border-radius: 10px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* background-color: #fff; */
+  border:3px solid #ff7875;
+  border-radius: 50%;
+  /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
 }
 
 .container > p {
   margin: 5px;
+  position: relative;
+  top:25px;
 }
