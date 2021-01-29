@@ -2,7 +2,7 @@ import { CloseCircleOutlined } from '@ant-design/icons';
 import { Button, Card, Col, DatePicker, Form, Input, Popover, Row, Select, TimePicker } from 'antd';
 import React, { FC, useState } from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
-import { connect, Dispatch } from 'umi';
+import { connect, Dispatch,FormattedMessage } from 'umi';
 import TableForm from './components/TableForm';
 import styles from './style.less';
 
@@ -30,20 +30,20 @@ const tableData = [
   {
     key: '1',
     workId: '00001',
-    name: 'John Brown',
-    department: 'New York No. 1 Lake Park',
+    name: '王大锤',
+    department: '电子信息支部',
   },
   {
     key: '2',
     workId: '00002',
-    name: 'Jim Green',
-    department: 'London No. 1 Lake Park',
+    name: '王铁柱',
+    department: '网络工程支部',
   },
   {
     key: '3',
     workId: '00003',
-    name: 'Joe Black',
-    department: 'Sidney No. 1 Lake Park',
+    name: '王二妞',
+    department: '计算机系支部',
   },
 ];
 
@@ -131,36 +131,39 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <Form.Item
-                label={fieldLabels.name}
+                label={<FormattedMessage id="活动主题" />}
                 name="name"
-                rules={[{ required: true, message: '请输入仓库名称' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入活动主题",
+                  },
+                ]}
               >
-                <Input placeholder="请输入仓库名称" />
-              </Form.Item>
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <Form.Item
-                label={fieldLabels.url}
-                name="url"
-                rules={[{ required: true, message: '请选择' }]}
-              >
-                <Input
-                  style={{ width: '100%' }}
-                  addonBefore="http://"
-                  addonAfter=".com"
-                  placeholder="请输入"
-                />
+                <Input placeholder="请输入活动主题" />
               </Form.Item>
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <Form.Item
-                label={fieldLabels.owner}
-                name="owner"
-                rules={[{ required: true, message: '请选择管理员' }]}
+                label={<FormattedMessage id="活动类型" />}
+                name="type"
+                rules={[{ required: true, message: '请选择活动类型' }]}
               >
-                <Select placeholder="请选择管理员">
-                  <Option value="xiao">付晓晓</Option>
-                  <Option value="mao">周毛毛</Option>
+                <Select placeholder="请选择活动类型">
+                  <Option value="private">私密</Option>
+                  <Option value="public">公开</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col  xl={{ span: 6, offset: 2 }} lg={6} md={12} sm={24}>
+              <Form.Item
+                label={<FormattedMessage id="活动考核方式" />}
+                name="check"
+                rules={[{ required: true, message: '请选择活动考核方式' }]}
+              >
+                <Select placeholder="请选择活动考核方式">
+                  <Option value="common">平时考核</Option>
+                  <Option value="all">年终考核</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -168,35 +171,46 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <Form.Item
-                label={fieldLabels.approver}
-                name="approver"
-                rules={[{ required: true, message: '请选择审批员' }]}
+                label={<FormattedMessage id="活动学时" />}
+                name="activityTime"
+                rules={[{ required: true, message: '请选择活动学时' }]}
               >
-                <Select placeholder="请选择审批员">
-                  <Option value="xiao">付晓晓</Option>
-                  <Option value="mao">周毛毛</Option>
+                <Select placeholder="请选择活动学时">
+                <Option value="two">2</Option>
+                  <Option value="four">4</Option>
+                  <Option value="eight">8</Option>
+                  <Option value="twl">12</Option>
+                  <Option value="twenFour">24</Option>
+                  <Option value="thirSix">36</Option>
                 </Select>
-              </Form.Item>
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <Form.Item
-                label={fieldLabels.dateRange}
-                name="dateRange"
-                rules={[{ required: true, message: '请选择生效日期' }]}
-              >
-                <RangePicker placeholder={['开始日期', '结束日期']} style={{ width: '100%' }} />
               </Form.Item>
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <Form.Item
-                label={fieldLabels.type}
-                name="type"
-                rules={[{ required: true, message: '请选择仓库类型' }]}
+                label={<FormattedMessage id="活动时间" />}
+                name="dateRange"
+                rules={[{ required: true, message: '请选择活动时间' }]}
               >
-                <Select placeholder="请选择仓库类型">
-                  <Option value="private">私密</Option>
-                  <Option value="public">公开</Option>
+                <RangePicker placeholder={['开始日期', '结束日期']} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col  xl={{ span: 6, offset: 2 }} lg={6} md={12} sm={24}>
+              {/* <Form.Item
+                label={<FormattedMessage id="活动成员选取" />}
+                name="activityMember"
+                rules={[{ required: true, message: '请选择活动成员' }]}
+              >
+                <Select placeholder="活动成员选取">
+                  <Option value="ee">电子信息支部</Option>
+                  <Option value="ce">网络工程支部</Option>
                 </Select>
+              </Form.Item> */}
+              <Form.Item
+                label={<FormattedMessage id="活动负责人" />}
+                name="check"
+                rules={[{ required: true, message: '请输入活动负责人' }]}
+              >
+                <Input placeholder="请输入活动负责人" />
               </Form.Item>
             </Col>
           </Row>
@@ -279,7 +293,7 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
             </Col>
           </Row>
         </Card> */}
-        <Card title="参会人员" bordered={false}>
+        <Card title="活动人员" bordered={false}>
           <Form.Item name="members">
             <TableForm />
           </Form.Item>
