@@ -46,7 +46,7 @@ const progressColumns = [
     key: 'cost',
   },
   {
-    title: '成绩',
+    title: '积分',
     dataIndex: 'score',
     key: 'score',
   },

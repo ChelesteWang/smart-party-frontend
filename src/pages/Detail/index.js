@@ -4,7 +4,12 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import G6 from '@antv/g6';
 import data from './data'
+import './style.css'
 // eslint-disable-next-line func-names
+import Ring from './Ring'
+import Score from './score'
+import Detail from './detail'
+
 export default function () {
   const ref = React.useRef(null)
   let graph = null
@@ -138,12 +143,12 @@ export default function () {
     },
   };
 
-  const width = 1000;
-  const height = 500;
+  const width = 650;
+  const height = 300;
 
-  const minimap = new G6.Minimap({
-    size: [150, 100],
-  });
+  // const minimap = new G6.Minimap({
+  //   size: [150, 100],
+  // });
   useEffect(() => {
     if (!graph) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -152,7 +157,7 @@ export default function () {
         width,
         height,
         linkCenter: true,
-        plugins: [minimap],
+        // plugins: [minimap],
         modes: {
           default: ['drag-canvas', 'zoom-canvas'],
         },
@@ -175,8 +180,65 @@ export default function () {
     graph.render()
     graph.fitView();
   }, [])
+  const myData = [
+    { type: "正式党员", percent: 0.56 },
+    { type: "预备党员", percent: 0.3334 },
+  ];
+
+  const renderContent = (value) => {
+    if (value !== undefined && value != null) {
+      const scale = `${((Math.round((value * 10000))) / 100.00).toFixed(2)}%`;
+      return scale;
+    }
+    return false
+  };
+
+  const myContent = {
+    siteCode: "党员概况",
+    title: "转正率",
+    percent: renderContent(myData[0].percent),
+  };
+
+  const myData1 = [
+    { type: "教师党员", percent: 0.26 },
+    { type: "预备党员", percent: 0.74 },
+  ];
+
+  const myContent1 = {
+    siteCode: "党员概况",
+    title: "师生党员占比",
+    percent: renderContent(myData1[0].percent)
+  };
 
   return (
-    <div ref={ref}></div>
+    <div>
+      <div className='ring'><p className='title'>转正率</p><Ring
+        data={myData}
+        content={myContent}
+      />
+      </div>
+      <div className='ring' style={{ marginLeft: 100 }}><p className='title'>师生党员占比</p><Ring
+        data={myData1}
+        content={myContent1}
+        intervalConfig={{
+          style: { fillOpacity: 0.6 },
+          size: [
+            "type",
+            (type) => {
+              return type === "已完成" ? 12 : 6;
+            },
+          ],
+        }}
+      />
+      </div>
+      <Detail></Detail>
+      <br style={{ clear: 'both', }} />
+      <div className='score'><p className='title'>积分统计图</p><Score></Score></div>
+      <div ><p className='title'>党组织结构图</p>
+        <div className='g6' ref={ref} /></div>
+    </div>
+
+
   );
 }
+

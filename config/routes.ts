@@ -25,7 +25,13 @@
             routes: [
               {
                 path: '/',
-                redirect: '/welcome',
+                redirect: '/detail',
+              },
+              {
+                name: '欢迎页',
+                icon: 'table',
+                path: '/detail',
+                component: './detail',
               },
               {
                 name: '事件处理',
@@ -56,12 +62,6 @@
                 icon: 'table',
                 path: '/basic',
                 component: './basic',
-              },
-              {
-                name: '组织构成',
-                icon: 'table',
-                path: 'tree',
-                component: './tree',
               },
               {
                 component: './404',
