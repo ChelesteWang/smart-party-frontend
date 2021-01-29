@@ -3,6 +3,7 @@ import './style.css'
 
 function Detail() {
     return (
+        
         <div className='detail' style={{ width: 750, height: 200 }}>
             <h1 className='title'>概况统计</h1>
             <div className='container'>
