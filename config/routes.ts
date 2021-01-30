@@ -34,22 +34,27 @@
                 component: './detail',
               },
               {
+                name: '党务管理',
+                icon: 'userAdd',
+                path: 'partymanage',
+                routes: [{
+                  path: '/',
+                  redirect: '/partymember',
+                }, {
+                  name: '添加党员',
+                  path: 'partymember',
+                  component: './basic-form',
+                }, {
+                  name: '添加党组织',
+                  path: 'partyBranch',
+                  component: './partybranch',
+                },]
+              },
+              {
                 name: '事件处理',
                 icon: 'audit',
                 path: '/list',
                 component: './TableList',
-              },
-              {
-                name: '添加党员',
-                icon: 'userAdd',
-                path: 'basic-form',
-                component: './basic-form',
-              },
-              {
-                name: '添加党组织',
-                icon: 'usergroupAdd',
-                path: 'partyBranch',
-                component: './partyBranch',
               },
               {
                 name: '添加事件',
