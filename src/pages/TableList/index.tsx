@@ -98,7 +98,7 @@ const TableList: React.FC = () => {
       title: (
         <FormattedMessage
           id="pages.searchTable.updateForm.ruleName.nameLabel"
-          defaultMessage="规则名称"
+          defaultMessage="活动Id"
         />
       ),
       dataIndex: 'name',
@@ -117,20 +117,58 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="描述" />,
-      dataIndex: 'desc',
+      title: <FormattedMessage id="pages.searchTable.titleSubject" defaultMessage="活动主题" />,
+      dataIndex: 'subject',
       valueType: 'textarea',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleCallNo" defaultMessage="服务调用次数" />,
-      dataIndex: 'callNo',
-      sorter: true,
-      hideInForm: true,
-      renderText: (val: string) =>
-        `${val}${intl.formatMessage({
-          id: 'pages.searchTable.tenThousand',
-          defaultMessage: ' 万 ',
-        })}`,
+      title: <FormattedMessage id="pages.searchTable.titleType" defaultMessage="活动类型" />,
+      dataIndex: 'type',
+      valueEnum: {
+        私密: { text: '私密' },
+        公开: { text: '公开' },
+      },
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleTest" defaultMessage="考核方式" />,
+      dataIndex: 'test',
+      valueEnum: {
+        平时考核: { text: '平时考核' },
+        年终考核: { text: '年终考核' },
+      },
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleHour" defaultMessage="活动学时" />,
+      dataIndex: 'hour',
+      valueEnum: {
+        2: { text: '2' },
+        4: { text: '4' },
+        8: { text: '8' },
+        12: { text: '12' },
+        24: { text: '24' },
+        36: { text: '36' },
+      },
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleStart" defaultMessage="开始日期" />,
+      width: 140,
+      key: 'since',
+      dataIndex: 'startAt',
+      valueType: 'date',
+      sorter: (a, b) => a.createdAt - b.createdAt,
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleEnd" defaultMessage="结束日期" />,
+      width: 140,
+      key: 'since',
+      dataIndex: 'endAt',
+      valueType: 'date',
+      sorter: (a, b) => a.createdAt - b.createdAt,
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleLeader" defaultMessage="活动负责人" />,
+      dataIndex: 'leader',
+      valueType: 'textarea',
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="状态" />,
@@ -139,25 +177,73 @@ const TableList: React.FC = () => {
       valueEnum: {
         0: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="关闭" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.default"
+              defaultMessage="活动未提交"
+            />
           ),
           status: 'Default',
         },
         1: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="运行中" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.running"
+              defaultMessage="活动已提交"
+            />
           ),
           status: 'Processing',
         },
         2: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="已上线" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.online"
+              defaultMessage="审批阶段一"
+            />
           ),
           status: 'Success',
         },
         3: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="异常" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.abnormal"
+              defaultMessage="审批阶段二"
+            />
+          ),
+          status: 'Error',
+        },
+        4: {
+          text: (
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.default"
+              defaultMessage="审批阶段三"
+            />
+          ),
+          status: 'Default',
+        },
+        5: {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="进行中" />
+          ),
+          status: 'Processing',
+        },
+        6: {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="活动结束" />
+          ),
+          status: 'Success',
+        },
+        7: {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="审批" />
+          ),
+          status: 'Error',
+        },
+        8: {
+          text: (
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.abnormal"
+              defaultMessage="分数结算"
+            />
           ),
           status: 'Error',
         },
@@ -201,10 +287,16 @@ const TableList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="配置" />
+          <FormattedMessage id="pages.searchTable.config" defaultMessage="审批" />
         </a>,
-        <a key="subscribeAlert" href="https://procomponents.ant.design/">
-          <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
+        <a
+          key="subscribeAlert"
+          onClick={() => {
+            handleUpdateModalVisible(true);
+            setCurrentRow(record);
+          }}
+        >
+          <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="分数结算" />
         </a>,
       ],
     },
@@ -252,7 +344,7 @@ const TableList: React.FC = () => {
               {/* <span>
                 <FormattedMessage
                   id="pages.searchTable.totalServiceCalls"
-                  defaultMessage="服务调用次数总计"
+                  defaultMessage="次数总计"
                 />{' '}
                 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)}{' '}
                 <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
@@ -274,10 +366,11 @@ const TableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
+
       <ModalForm
         title={intl.formatMessage({
           id: 'pages.searchTable.createForm.newRule',
-          defaultMessage: '新建规则',
+          defaultMessage: '新建',
         })}
         width="400px"
         visible={createModalVisible}
@@ -297,18 +390,18 @@ const TableList: React.FC = () => {
             {
               required: true,
               message: (
-                <FormattedMessage
-                  id="pages.searchTable.ruleName"
-                  defaultMessage="规则名称为必填项"
-                />
+                <FormattedMessage id="pages.searchTable.ruleName" defaultMessage="活动Id为必填项" />
               ),
             },
           ]}
           width="md"
+          placeholder="活动Id"
           name="name"
         />
-        <ProFormTextArea width="md" name="desc" />
+        <ProFormText placeholder="活动类别" width="md" name="type" />
+        <ProFormTextArea placeholder="活动主题" width="md" name="subject" />
       </ModalForm>
+
       <UpdateForm
         onSubmit={async (value) => {
           const success = await handleUpdate(value);
