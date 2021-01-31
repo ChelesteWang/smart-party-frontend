@@ -56,14 +56,14 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
     if (publicType) setShowPublicUsers(publicType === '2');
   };
 
-  const handleChange = (value:String) => {
+  const handleChange = (value: String) => {
     console.log(`selected ${value}`);
-  }
+  };
 
   return (
     <PageContainer content={<FormattedMessage id="formandbasic-form.basic.description" />}>
       <Card bordered={false}>
-      <Form
+        <Form
           hideRequiredMark
           style={{ marginTop: 8 }}
           form={form}
@@ -80,11 +80,11 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
             rules={[
               {
                 required: true,
-                message: "请输入党组织名称",
+                message: '请输入党组织名称',
               },
             ]}
           >
-            <Input placeholder="请输入党组织名称" style={{ width: 160 }}/>
+            <Input placeholder="请输入党组织名称" style={{ width: 160 }} />
           </FormItem>
           <FormItem
             {...formItemLayout}
@@ -151,3 +151,5 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
 export default connect(({ loading }: { loading: { effects: { [key: string]: boolean } } }) => ({
   submitting: loading.effects['formAndbasicForm/submitRegularForm'],
 }))(BasicForm1);
+
+// export default BasicForm1

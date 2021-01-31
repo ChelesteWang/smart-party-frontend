@@ -34,6 +34,12 @@
                 component: './detail',
               },
               {
+                name: '支部详情',
+                icon: 'SolutionOutlined',
+                path: '/branchlist',
+                component: './branchlist',
+              },
+              {
                 name: '党务管理',
                 icon: 'userAdd',
                 path: 'partymanage',
@@ -51,19 +57,19 @@
                 },]
               },
               {
-                name: '事件处理',
-                icon: 'audit',
-                path: '/list',
-                component: './TableList',
-              },
-              {
-                name: '添加事件',
+                name: '活动申报',
                 icon: 'form',
                 path: 'advanced-form',
                 component: './advanced-form',
               },
               {
-                name: '党员详情页',
+                name: '活动审批',
+                icon: 'audit',
+                path: '/list',
+                component: './TableList',
+              },
+              {
+                // name: '党员详情页',
                 icon: 'solution',
                 path: '/basic',
                 component: './basic',
