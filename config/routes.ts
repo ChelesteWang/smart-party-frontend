@@ -57,11 +57,17 @@
                 path: 'advanced-form',
                 component: './advanced-form',
               },
+              // {
+              //   name: '党员详情页',
+              //   icon: 'solution',
+              //   path: '/basic',
+              //   component: './basic',
+              // },
               {
-                name: '党员详情页',
+                name: '党员列表',
                 icon: 'solution',
-                path: '/basic',
-                component: './basic',
+                path: '/memberlist',
+                component: './memberList',
               },
               {
                 component: './404',
