@@ -11,7 +11,6 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 declare module 'omit.js';
-
 // google analytics interface
 type GAFieldsObject = {
   eventCategory: string;

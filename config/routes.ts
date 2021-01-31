@@ -62,6 +62,12 @@
                 path: 'advanced-form',
                 component: './advanced-form',
               },
+              // {
+              //   name: '党员详情页',
+              //   icon: 'solution',
+              //   path: '/basic',
+              //   component: './basic',
+              // },
               {
                 name: '活动审批',
                 icon: 'audit',
