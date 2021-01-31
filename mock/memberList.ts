@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
 import { parse } from 'url';
-import { TableListItem, TableListParams } from '@/pages/TableList/data';
+import { TableListItem, TableListParams } from '@/pages/memberList/data';
 
 // mock tableListDataSource
 const genList = (current: number, pageSize: number) => {
@@ -10,21 +10,73 @@ const genList = (current: number, pageSize: number) => {
   for (let i = 0; i < pageSize; i += 1) {
     const index = (current - 1) * 10 + i;
     tableListDataSource.push({
-      key: index,
-      disabled: i % 6 === 0,
-      href: 'https://ant.design',
-      avatar: [
-        'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
-        'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png',
-      ][i % 2],
-      name: `TradeCode ${index}`,
-      owner: '曲丽丽',
-      desc: '这是一段描述',
-      callNo: Math.floor(Math.random() * 1000),
-      status: Math.floor(Math.random() * 10) % 4,
-      updatedAt: new Date(),
-      createdAt: new Date(),
-      progress: Math.ceil(Math.random() * 100),
+      name: `王${index}锤`,
+      id: `0000000${index}`,
+      department: Math.floor(Math.random() * 10) % 4,
+      sex:'男',
+      ethic:'汉族',
+      class:'1班',
+      policitalStatus:'中共党员',
+      phone:'1310000xxxx',
+      birth:'1996-01',
+      joinTime: '2020-01-01',
+      positiveTime: '2021-01-01',
+      isBCmember:true,
+      activities:[{
+        index:1,
+        name:'支教',
+        role:'负责人',
+        type:'党组织生活',
+        startTime:'2017-10-01 14:00',
+        endTime:'2017-10-02 14:00',
+        cost: '24',
+        score: 90,
+        memo:'无'
+      },
+      {
+        index:2,
+        name:'支教',
+        role:'负责人',
+        type:'党组织生活',
+        startTime:'2017-10-01 14:00',
+        endTime:'2017-10-02 14:00',
+        cost: '24',
+        score: 90,
+        memo:'无'
+      },
+      {
+        index:3,
+        name:'支教',
+        role:'负责人',
+        type:'党组织生活',
+        startTime:'2017-10-01 14:00',
+        endTime:'2017-10-02 14:00',
+        cost: '24',
+        score: 90,
+        memo:'无'
+      },
+      {
+        index:4,
+        name:'支教',
+        role:'负责人',
+        type:'党组织生活',
+        startTime:'2017-10-01 14:00',
+        endTime:'2017-10-02 14:00',
+        cost: '24',
+        score: 90,
+        memo:'无'
+      },
+      {
+        index:5,
+        name:'支教',
+        role:'负责人',
+        type:'党组织生活',
+        startTime:'2017-10-01 14:00',
+        endTime:'2017-10-02 14:00',
+        cost: '24',
+        score: 90,
+        memo:'无'
+      }]
     });
   }
   tableListDataSource.reverse();
@@ -168,6 +220,6 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
 
 
 export default {
-  'GET /api/rule': getRule,
-  'POST /api/rule': postRule,
+  'GET /api/member': getRule,
+  'POST /api/member': postRule,
 };
