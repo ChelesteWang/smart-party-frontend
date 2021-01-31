@@ -59,7 +59,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       <StepsForm.StepForm
         initialValues={{
           name: props.values.name,
-          desc: props.values.desc,
+          id: props.values.id,
         }}
         title={intl.formatMessage({
           id: 'pages.searchTable.updateForm.basicConfig',
@@ -79,38 +79,34 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               message: (
                 <FormattedMessage
                   id="pages.searchTable.updateForm.ruleName.nameRules"
-                  defaultMessage="请输入规则名称！"
+                  defaultMessage="请输入姓名！"
                 />
               ),
             },
           ]}
         />
         <ProFormTextArea
-          name="desc"
+          name="id"
           width="md"
           label={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.ruleDesc.descLabel',
+            id: 'pages.searchTable.updateForm.ruleName.Id',
             defaultMessage: '规则描述',
-          })}
-          placeholder={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.ruleDesc.descPlaceholder',
-            defaultMessage: '请输入至少五个字符',
           })}
           rules={[
             {
               required: true,
               message: (
                 <FormattedMessage
-                  id="pages.searchTable.updateForm.ruleDesc.descRules"
-                  defaultMessage="请输入至少五个字符的规则描述！"
+                  id="pages.searchTable.updateForm.IdRules"
+                  defaultMessage="请输入Id！"
                 />
               ),
-              min: 5,
+              min: 2,
             },
           ]}
         />
       </StepsForm.StepForm>
-      <StepsForm.StepForm
+      {/* <StepsForm.StepForm
         initialValues={{
           target: '0',
           template: '0',
@@ -203,7 +199,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             week: '周',
           }}
         />
-      </StepsForm.StepForm>
+      </StepsForm.StepForm> */}
     </StepsForm>
   );
 };
