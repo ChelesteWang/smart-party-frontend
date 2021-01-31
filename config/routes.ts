@@ -70,9 +70,13 @@
               },
               {
                 // name: '党员详情页',
-                icon: 'solution',
                 path: '/basic',
                 component: './basic',
+              },
+              {
+                // name: '党员列表页',
+                path: '/memberlist',
+                component: './memberlist',
               },
               {
                 component: './404',
