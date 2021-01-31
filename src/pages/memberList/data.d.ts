@@ -1,18 +1,17 @@
-export interface TableListItem {
-  id:string;
-  name:string;
-  sex:string,
-  ethic:string,
-  class?:string,
-  policitalStatus:string,
-  phone:string,
-  birth:string,
-  joinTime:date,
-  positiveTime?:date,
-  department:number,
-  isBCmember?:boolean,
-  activities:Activity[]
-}
+export type TableListItem = {
+  key: number;
+  disabled?: boolean;
+  href: string;
+  avatar: string;
+  name: string;
+  owner: string;
+  desc: string;
+  callNo: number;
+  status: number;
+  updatedAt: Date;
+  createdAt: Date;
+  progress: number;
+};
 
 export type TableListPagination = {
   total: number;

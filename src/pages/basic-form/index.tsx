@@ -117,7 +117,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
           <FormItem
             {...formItemLayout}
             label={<FormattedMessage id="民族" />}
-            name="title"
+            name="ethic"
             rules={[
               {
                 required: true,
@@ -145,7 +145,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
                 </em>
               </span>
             }
-            name="title"
+            name="class"
           >
             <Input placeholder="请输入班级" style={{ width: 160 }}/>
           </FormItem>
@@ -154,7 +154,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
           <FormItem
             {...formItemLayout}
             label={<FormattedMessage id="政治面貌" />}
-            name="title"
+            name="politicalStatus"
             rules={[
               {
                 required: true,
@@ -257,7 +257,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
           <FormItem
             {...formItemLayout}
             label={<FormattedMessage id="所在支部" />}
-            name="title"
+            name="belong"
             rules={[
               {
                 required: true,
@@ -275,7 +275,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
           <FormItem
             {...formItemLayout}
             label={<FormattedMessage id="是否支部委员" />}
-            name="title"
+            name="isBCmember"
             rules={[
               {
                 required: true,

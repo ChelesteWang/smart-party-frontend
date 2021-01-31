@@ -118,51 +118,51 @@ const TableList: React.FC = () => {
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleSubject" defaultMessage="活动主题" />,
-      dataIndex: 'subject',
+      dataIndex: 'theme',
       valueType: 'textarea',
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleType" defaultMessage="活动类型" />,
-      dataIndex: 'type',
+      dataIndex: 'activityType',
       valueEnum: {
-        私密: { text: '私密' },
-        公开: { text: '公开' },
+        0: { text: '社会活动' },
+        1: { text: '学习' },
+        2: { text: '专题报告' },
       },
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleTest" defaultMessage="考核方式" />,
-      dataIndex: 'test',
+      dataIndex: 'method',
       valueEnum: {
-        平时考核: { text: '平时考核' },
-        年终考核: { text: '年终考核' },
+        0: { text: '平时考核' },
+        1: { text: '年终考核' },
       },
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleHour" defaultMessage="活动学时" />,
-      dataIndex: 'hour',
+      dataIndex: 'time',
       valueEnum: {
-        2: { text: '2' },
-        4: { text: '4' },
-        8: { text: '8' },
-        12: { text: '12' },
-        24: { text: '24' },
-        36: { text: '36' },
+        0: { text: '2' },
+        1: { text: '4' },
+        2: { text: '8' },
+        3: { text: '12' },
+        4: { text: '24' },
       },
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleStart" defaultMessage="开始日期" />,
       width: 140,
       key: 'since',
-      dataIndex: 'startAt',
-      valueType: 'date',
+      dataIndex: 'startTime',
+      valueType: 'dateTime',
       sorter: (a, b) => a.createdAt - b.createdAt,
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleEnd" defaultMessage="结束日期" />,
       width: 140,
       key: 'since',
-      dataIndex: 'endAt',
-      valueType: 'date',
+      dataIndex: 'endTime',
+      valueType: 'dateTime',
       sorter: (a, b) => a.createdAt - b.createdAt,
     },
     {
@@ -254,7 +254,7 @@ const TableList: React.FC = () => {
         <FormattedMessage id="pages.searchTable.titleUpdatedAt" defaultMessage="上次调度时间" />
       ),
       sorter: true,
-      dataIndex: 'updatedAt',
+      dataIndex: 'updatedTime',
       valueType: 'dateTime',
       renderFormItem: (item, { defaultRender, ...rest }, form) => {
         const status = form.getFieldValue('status');
