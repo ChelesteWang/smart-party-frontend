@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Table, Drawer } from 'antd';
+import { Button, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -12,7 +12,6 @@ import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
 import type { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import { request } from 'express';
 
 /**
  * 添加节点
@@ -43,7 +42,8 @@ const handleUpdate = async (fields: FormValueType) => {
   try {
     await updateRule({
       name: fields.name,
-      // id: fields.id,
+      desc: fields.desc,
+      key: fields.key,
     });
     hide();
 
@@ -98,10 +98,11 @@ const TableList: React.FC = () => {
       title: (
         <FormattedMessage
           id="pages.searchTable.updateForm.ruleName.nameLabel"
-          defaultMessage="姓名"
+          defaultMessage="活动Id"
         />
       ),
       dataIndex: 'name',
+      tip: '规则名称是唯一的 key',
       render: (dom, entity) => {
         return (
           <a
@@ -116,110 +117,164 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.updateForm.ruleName.Id" defaultMessage="编号" />,
-      dataIndex: 'id',
+      title: <FormattedMessage id="pages.searchTable.titleSubject" defaultMessage="活动主题" />,
+      dataIndex: 'subject',
       valueType: 'textarea',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="所在支部" />,
-      dataIndex: 'department',
+      title: <FormattedMessage id="pages.searchTable.titleType" defaultMessage="活动类型" />,
+      dataIndex: 'type',
+      valueEnum: {
+        私密: { text: '私密' },
+        公开: { text: '公开' },
+      },
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleTest" defaultMessage="考核方式" />,
+      dataIndex: 'test',
+      valueEnum: {
+        平时考核: { text: '平时考核' },
+        年终考核: { text: '年终考核' },
+      },
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleHour" defaultMessage="活动学时" />,
+      dataIndex: 'hour',
+      valueEnum: {
+        2: { text: '2' },
+        4: { text: '4' },
+        8: { text: '8' },
+        12: { text: '12' },
+        24: { text: '24' },
+        36: { text: '36' },
+      },
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleStart" defaultMessage="开始日期" />,
+      width: 140,
+      key: 'since',
+      dataIndex: 'startAt',
+      valueType: 'date',
+      sorter: (a, b) => a.createdAt - b.createdAt,
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleEnd" defaultMessage="结束日期" />,
+      width: 140,
+      key: 'since',
+      dataIndex: 'endAt',
+      valueType: 'date',
+      sorter: (a, b) => a.createdAt - b.createdAt,
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleLeader" defaultMessage="活动负责人" />,
+      dataIndex: 'leader',
+      valueType: 'textarea',
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="状态" />,
+      dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
         0: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="电子信息支部" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.default"
+              defaultMessage="活动未提交"
+            />
           ),
           status: 'Default',
         },
         1: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="网络工程支部" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.running"
+              defaultMessage="活动已提交"
+            />
           ),
           status: 'Processing',
         },
         2: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="计算机支部" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.online"
+              defaultMessage="审批阶段一"
+            />
           ),
           status: 'Success',
         },
         3: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="信息工程支部" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.abnormal"
+              defaultMessage="审批阶段二"
+            />
+          ),
+          status: 'Error',
+        },
+        4: {
+          text: (
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.default"
+              defaultMessage="审批阶段三"
+            />
+          ),
+          status: 'Default',
+        },
+        5: {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="进行中" />
+          ),
+          status: 'Processing',
+        },
+        6: {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="活动结束" />
+          ),
+          status: 'Success',
+        },
+        7: {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="审批" />
+          ),
+          status: 'Error',
+        },
+        8: {
+          text: (
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.abnormal"
+              defaultMessage="分数结算"
+            />
           ),
           status: 'Error',
         },
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="性别" />,
-      dataIndex: 'sex',
-      valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="男" />
-          ),
-        },
-        1: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="女" />
-          ),
-        },
-      }
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="政治面貌" />,
-      dataIndex: 'policitalStatus',
-      valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="中共党员" />
-          ),
-        },
-        1: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="共青团员" />
-          ),
-        },
-      }
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.titleCallNo" defaultMessage="联系电话" />,
-      dataIndex: 'phone',
+      title: (
+        <FormattedMessage id="pages.searchTable.titleUpdatedAt" defaultMessage="上次调度时间" />
+      ),
       sorter: true,
-      hideInForm: true,
-      // renderText: (val: string) =>
-      //   `${val}${intl.formatMessage({
-      //     id: 'pages.searchTable.tenThousand',
-      //     defaultMessage: ' 万 ',
-      //   })}`,
+      dataIndex: 'updatedAt',
+      valueType: 'dateTime',
+      renderFormItem: (item, { defaultRender, ...rest }, form) => {
+        const status = form.getFieldValue('status');
+        if (`${status}` === '0') {
+          return false;
+        }
+        if (`${status}` === '3') {
+          return (
+            <Input
+              {...rest}
+              placeholder={intl.formatMessage({
+                id: 'pages.searchTable.exception',
+                defaultMessage: '请输入异常原因！',
+              })}
+            />
+          );
+        }
+        return defaultRender(item);
+      },
     },
-    // {
-    //   title: (
-    //     <FormattedMessage id="pages.searchTable.titleUpdatedAt" defaultMessage="上次调度时间" />
-    //   ),
-    //   sorter: true,
-    //   dataIndex: 'updatedAt',
-    //   valueType: 'dateTime',
-    //   renderFormItem: (item, { defaultRender, ...rest }, form) => {
-    //     const status = form.getFieldValue('status');
-    //     if (`${status}` === '0') {
-    //       return false;
-    //     }
-    //     if (`${status}` === '3') {
-    //       return (
-    //         <Input
-    //           {...rest}
-    //           placeholder={intl.formatMessage({
-    //             id: 'pages.searchTable.exception',
-    //             defaultMessage: '请输入异常原因！',
-    //           })}
-    //         />
-    //       );
-    //     }
-    //     return defaultRender(item);
-    //   },
-    // },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
@@ -232,163 +287,21 @@ const TableList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="修改" />
+          <FormattedMessage id="pages.searchTable.config" defaultMessage="审批" />
         </a>,
-        // <a key="subscribeAlert" href="https://procomponents.ant.design/">
-        //   <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
-        // </a>,
+        <a
+          key="subscribeAlert"
+          onClick={() => {
+            handleUpdateModalVisible(true);
+            setCurrentRow(record);
+          }}
+        >
+          <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="分数结算" />
+        </a>,
       ],
     },
   ];
 
-  const columns2: ProColumns<TableListItem>[] = [
-    {
-      title: (
-        <FormattedMessage
-          id="pages.searchTable.updateForm.ruleName.nameLabel"
-          defaultMessage="姓名"
-        />
-      ),
-      dataIndex: 'name',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.updateForm.ruleName.Id" defaultMessage="编号" />,
-      dataIndex: 'id',
-      valueType: 'textarea',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.Sex" defaultMessage="性别" />,
-      dataIndex: 'sex',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.Ethic" defaultMessage="性别" />,
-      dataIndex: 'ethic',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.Phone" defaultMessage="联系电话" />,
-      dataIndex: 'phone',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.Status" defaultMessage="政治面貌" />,
-      dataIndex: 'policitalStatus',
-    },
-  //   birth:string,
-  // joinTime:date,
-  // positiveTime?:date,
-  // department:number,
-  // isBCmember?:boolean,
-  // activities:Activity[]
-    {
-      title: <FormattedMessage id="pages.searchTable.Birth" defaultMessage="出生年月" />,
-      dataIndex: 'birth',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.JoinTime" defaultMessage="入党时间" />,
-      dataIndex: 'joinTime',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.PositiveTime" defaultMessage="转正时间" />,
-      dataIndex: 'positiveTime',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.Department" defaultMessage="所在支部" />,
-      dataIndex: 'department',
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="电子信息支部" />
-          ),
-          status: 'Default',
-        },
-        1: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="网络工程支部" />
-          ),
-          status: 'Processing',
-        },
-        2: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="计算机支部" />
-          ),
-          status: 'Success',
-        },
-        3: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="信息工程支部" />
-          ),
-          status: 'Error',
-        },
-      }
-    },
-    // {
-    //   title: <FormattedMessage id="pages.searchTable.Department" defaultMessage="是否支部委员" />,
-    //   dataIndex: 'isBCmember',
-    //   hideInForm: true,
-    // },
-    {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
-      dataIndex: 'option',
-      valueType: 'option',
-      render: (_, record) => [
-        <a
-          key="config"
-          onClick={() => {
-            handleUpdateModalVisible(true);
-            setCurrentRow(record);
-          }}
-        >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="修改" />
-        </a>,
-      ],
-    },
-    // {
-    //   title: <FormattedMessage id="pages.searchTable.Activity" defaultMessage="相关事件" />,
-    //   dataIndex: 'activities',
-    // },
-  ];
-  const columns3 = [
-    {
-      title: '活动名称',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '活动角色',
-      dataIndex: 'role',
-      key: 'role',
-    },
-    {
-      title: '活动类别',
-      dataIndex: 'type',
-      key: 'type',
-    },
-    {
-      title: '活动开始时间',
-      dataIndex: 'startTime',
-      key: 'startTime',
-    },
-    {
-      title: '活动结束时间',
-      dataIndex: 'endTime',
-      key: 'endTime',
-    },
-    {
-      title: '活动时长',
-      dataIndex: 'cost',
-      key: 'cost',
-    },
-    {
-      title: '积分',
-      dataIndex: 'score',
-      key: 'score',
-    },
-    {
-      title: '备注',
-      dataIndex: 'memo',
-      key: 'memo',
-    },
-  ];
   return (
     <PageContainer>
       <ProTable<TableListItem>
@@ -402,17 +315,15 @@ const TableList: React.FC = () => {
           labelWidth: 120,
         }}
         toolBarRender={() => [
-          //新建按钮
-          // <Button
-          //   type="primary"
-          //   key="primary"
-          //   onClick={() => {
-          //     handleModalVisible(true);
-          //   }}
-          // >
-          //   <PlusOutlined /> 
-          //   <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-          // </Button>,
+          <Button
+            type="primary"
+            key="primary"
+            onClick={() => {
+              handleModalVisible(true);
+            }}
+          >
+            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+          </Button>,
         ]}
         request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
@@ -433,7 +344,7 @@ const TableList: React.FC = () => {
               {/* <span>
                 <FormattedMessage
                   id="pages.searchTable.totalServiceCalls"
-                  defaultMessage="服务调用次数总计"
+                  defaultMessage="次数总计"
                 />{' '}
                 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)}{' '}
                 <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
@@ -450,15 +361,16 @@ const TableList: React.FC = () => {
           >
             <FormattedMessage id="pages.searchTable.batchDeletion" defaultMessage="批量删除" />
           </Button>
-          {/* <Button type="primary">
+          <Button type="primary">
             <FormattedMessage id="pages.searchTable.batchApproval" defaultMessage="批量审批" />
-          </Button> */}
+          </Button>
         </FooterToolbar>
       )}
+
       <ModalForm
         title={intl.formatMessage({
           id: 'pages.searchTable.createForm.newRule',
-          defaultMessage: '新建规则',
+          defaultMessage: '新建',
         })}
         width="400px"
         visible={createModalVisible}
@@ -478,18 +390,18 @@ const TableList: React.FC = () => {
             {
               required: true,
               message: (
-                <FormattedMessage
-                  id="pages.searchTable.ruleName"
-                  defaultMessage="规则名称为必填项"
-                />
+                <FormattedMessage id="pages.searchTable.ruleName" defaultMessage="活动Id为必填项" />
               ),
             },
           ]}
           width="md"
+          placeholder="活动Id"
           name="name"
         />
-        <ProFormTextArea width="md" name="desc" />
+        <ProFormText placeholder="活动类别" width="md" name="type" />
+        <ProFormTextArea placeholder="活动主题" width="md" name="subject" />
       </ModalForm>
+
       <UpdateForm
         onSubmit={async (value) => {
           const success = await handleUpdate(value);
@@ -510,7 +422,7 @@ const TableList: React.FC = () => {
       />
 
       <Drawer
-        width={1000}
+        width={600}
         visible={showDetail}
         onClose={() => {
           setCurrentRow(undefined);
@@ -519,7 +431,6 @@ const TableList: React.FC = () => {
         closable={false}
       >
         {currentRow?.name && (
-          <div>
           <ProDescriptions<TableListItem>
             column={2}
             title={currentRow?.name}
@@ -529,72 +440,8 @@ const TableList: React.FC = () => {
             params={{
               id: currentRow?.name,
             }}
-            columns={columns2 as ProDescriptionsItemProps<TableListItem>[]}
-          >
-          </ProDescriptions>
-          <h3>相关事件</h3>
-          <Table<TableListItem>
-            // column={9}
-            dataSource={[
-              {
-                  index:1,
-                  name:'支教',
-                  role:'负责人',
-                  type:'党组织生活',
-                  startTime:'2017-10-01 14:00',
-                  endTime:'2017-10-02 14:00',
-                  cost: '24',
-                  score: 90,
-                  memo:'无'
-                },
-                {
-                  index:2,
-                  name:'支教',
-                  role:'负责人',
-                  type:'党组织生活',
-                  startTime:'2017-10-01 14:00',
-                  endTime:'2017-10-02 14:00',
-                  cost: '24',
-                  score: 90,
-                  memo:'无'
-                },
-                {
-                  index:3,
-                  name:'支教',
-                  role:'负责人',
-                  type:'党组织生活',
-                  startTime:'2017-10-01 14:00',
-                  endTime:'2017-10-02 14:00',
-                  cost: '24',
-                  score: 90,
-                  memo:'无'
-                },
-                {
-                  index:4,
-                  name:'支教',
-                  role:'负责人',
-                  type:'党组织生活',
-                  startTime:'2017-10-01 14:00',
-                  endTime:'2017-10-02 14:00',
-                  cost: '24',
-                  score: 90,
-                  memo:'无'
-                },
-                {
-                  index:5,
-                  name:'支教',
-                  role:'负责人',
-                  type:'党组织生活',
-                  startTime:'2017-10-01 14:00',
-                  endTime:'2017-10-02 14:00',
-                  cost: '24',
-                  score: 90,
-                  memo:'无'
-                },
-            ]}
-            columns={columns3}
+            columns={columns as ProDescriptionsItemProps<TableListItem>[]}
           />
-          </div>
         )}
       </Drawer>
     </PageContainer>

@@ -55,7 +55,6 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
     const { publicType } = changedValues;
     if (publicType) setShowPublicUsers(publicType === '2');
   };
-
   const handleChange = (value: String) => {
     console.log(`selected ${value}`);
   };
@@ -89,7 +88,7 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
           <FormItem
             {...formItemLayout}
             label={<FormattedMessage id="组织属性" />}
-            name="sex"
+            name="zuzhi"
             rules={[
               {
                 required: true,
@@ -105,7 +104,7 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
           <FormItem
             {...formItemLayout}
             label={<FormattedMessage id="单位属性" />}
-            name="sex"
+            name="danwei"
             rules={[
               {
                 required: true,
@@ -114,14 +113,12 @@ const BasicForm1: FC<BasicFormProps> = (props) => {
           >
             <Select defaultValue="commonUni" style={{ width: 160 }} onChange={handleChange}>
               <Option value="commonUni">普通高校</Option>
-              {/* <Option value="zongzhi">总支</Option>
-              <Option value="zhibu">支部</Option> */}
             </Select>
           </FormItem>
           <FormItem
             {...formItemLayout}
             label={<FormattedMessage id="所属行业" />}
-            name="sex"
+            name="hangye"
             rules={[
               {
                 required: true,

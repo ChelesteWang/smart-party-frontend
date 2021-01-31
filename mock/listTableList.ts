@@ -7,24 +7,20 @@ import { TableListItem, TableListParams } from '@/pages/TableList/data';
 const genList = (current: number, pageSize: number) => {
   const tableListDataSource: TableListItem[] = [];
 
-  for (let i = 0; i < pageSize; i += 1) {
+  for (let i = 0; i < pageSize+100; i += 1) {
     const index = (current - 1) * 10 + i;
     tableListDataSource.push({
-      key: index,
-      disabled: i % 6 === 0,
-      href: 'https://ant.design',
-      avatar: [
-        'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
-        'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png',
-      ][i % 2],
-      name: `TradeCode ${index}`,
-      owner: '曲丽丽',
-      desc: '这是一段描述',
-      callNo: Math.floor(Math.random() * 1000),
-      status: Math.floor(Math.random() * 10) % 4,
-      updatedAt: new Date(),
-      createdAt: new Date(),
-      progress: Math.ceil(Math.random() * 100),
+      id: index,
+      name: `000000${index}`,
+      theme:'共建共治共享',
+      activityType:Math.floor(Math.random() * 10) % 3,
+      method:Math.floor(Math.random() * 10) % 2,
+      time:Math.floor(Math.random() * 10) % 5,
+      startTime:'2020-11-01 15:00',
+      endTime:'2020-11-09 12:00',
+      leader:`王${index}锤`,
+      status:Math.floor(Math.random() * 10) % 9,
+      updatedTime:'2020-12-01'
     });
   }
   tableListDataSource.reverse();
