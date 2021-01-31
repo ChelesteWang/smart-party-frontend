@@ -124,7 +124,7 @@ class TableList extends React.Component {
                   avatar={
                     <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                   }
-                  title={<a href="/detail">{item.name}</a>}
+                  title={<a href={'/memberList?id='+item.id}>{item.name}</a>}
                   description={item.desc}
                 />
               </Card>
