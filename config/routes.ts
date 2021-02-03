@@ -69,6 +69,12 @@
               //   component: './basic',
               // },
               {
+                name: '党员详情页',
+                icon: 'solution',
+                path: '/memberlist',
+                component: './memberList',
+              },
+              {
                 name: '活动审批',
                 icon: 'audit',
                 path: '/list',

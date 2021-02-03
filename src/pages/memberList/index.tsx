@@ -220,25 +220,25 @@ const TableList: React.FC = () => {
     //     return defaultRender(item);
     //   },
     // },
-    {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
-      dataIndex: 'option',
-      valueType: 'option',
-      render: (_, record) => [
-        <a
-          key="config"
-          onClick={() => {
-            handleUpdateModalVisible(true);
-            setCurrentRow(record);
-          }}
-        >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="修改" />
-        </a>,
-        // <a key="subscribeAlert" href="https://procomponents.ant.design/">
-        //   <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
-        // </a>,
-      ],
-    },
+    // {
+    //   title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
+    //   dataIndex: 'option',
+    //   valueType: 'option',
+    //   render: (_, record) => [
+    //     <a
+    //       key="config"
+    //       onClick={() => {
+    //         handleUpdateModalVisible(true);
+    //         setCurrentRow(record);
+    //       }}
+    //     >
+    //       <FormattedMessage id="pages.searchTable.config" defaultMessage="修改" />
+    //     </a>,
+    //     // <a key="subscribeAlert" href="https://procomponents.ant.design/">
+    //     //   <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
+    //     // </a>,
+    //   ],
+    // },
   ];
 
   const columns2: ProColumns<TableListItem>[] = [

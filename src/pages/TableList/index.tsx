@@ -12,7 +12,7 @@ import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
 import type { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-
+import './style.less';
 /**
  * 添加节点
  *
@@ -42,8 +42,8 @@ const handleUpdate = async (fields: FormValueType) => {
   try {
     await updateRule({
       name: fields.name,
-      desc: fields.desc,
-      key: fields.key,
+      // desc: fields.desc,
+      // key: fields.key,
     });
     hide();
 
@@ -155,7 +155,7 @@ const TableList: React.FC = () => {
       key: 'since',
       dataIndex: 'startTime',
       valueType: 'dateTime',
-      sorter: (a, b) => a.createdAt - b.createdAt,
+      sorter: (a, b) => parseInt(a.startTime) - parseInt(b.startTime),
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleEnd" defaultMessage="结束日期" />,
@@ -163,7 +163,7 @@ const TableList: React.FC = () => {
       key: 'since',
       dataIndex: 'endTime',
       valueType: 'dateTime',
-      sorter: (a, b) => a.createdAt - b.createdAt,
+      sorter: (a, b) => parseInt(a.endTime) - parseInt(b.endTime),
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleLeader" defaultMessage="活动负责人" />,
@@ -315,15 +315,15 @@ const TableList: React.FC = () => {
           labelWidth: 120,
         }}
         toolBarRender={() => [
-          <Button
-            type="primary"
-            key="primary"
-            onClick={() => {
-              handleModalVisible(true);
-            }}
-          >
-            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-          </Button>,
+          // <Button
+          //   type="primary"
+          //   key="primary"
+          //   onClick={() => {
+          //     handleModalVisible(true);
+          //   }}
+          // >
+          //   <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+          // </Button>,
         ]}
         request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
