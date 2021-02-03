@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import {
   ProFormSelect,
   ProFormText,
@@ -26,24 +27,78 @@ export type UpdateFormProps = {
   updateModalVisible: boolean;
   values: Partial<TableListItem>;
 };
+const { Option } = Select;
+
+const { TextArea } = Input;
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const intl = useIntl();
+  const [form] = Form.useForm();
+
+  const onFinish = (values: any) => {
+    console.log(values);
+  };
+  
+  const [visible, setVisible] = React.useState(false);
+  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const [cancelLoading, setCancelLoading] = React.useState(false);
+
+  const handleOk = () => {
+    
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setVisible(false);
+      props.onSubmit();
+      setConfirmLoading(false);
+      
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    
+    setCancelLoading(true);
+    setTimeout(() => {
+      setVisible(false);
+      props.onCancel();
+      setCancelLoading(false);
+    }, 2000);
+  };
+
   return (
     <Modal
-            width={640}
-            bodyStyle={{ padding: '32px 40px 48px' }}
-            destroyOnClose
-            title={intl.formatMessage({
-              id: 'pages.searchTable.updateForm.ruleConfig',
-              defaultMessage: '活动审批',
-            })}
-            visible={props.updateModalVisible}
-            // footer={submitter}
-            onCancel={() => {
-              props.onCancel();
-            }}
-          >
+        width={640}
+        bodyStyle={{ padding: '32px 40px 48px' }}
+        destroyOnClose
+        title={intl.formatMessage({
+          id: 'pages.searchTable.updateForm.ruleConfig',
+          defaultMessage: '活动审批',
+        })}
+        visible={props.updateModalVisible}
+        footer={[
+          <Button key="back" loading={cancelLoading} onClick={handleCancel}>
+            驳回
+          </Button>,
+          <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOk}>
+            通过
+          </Button>,
+        ]}
+        onCancel={() => {
+          props.onCancel();
+        }}
+      >
+      <Form form={form} name="control-hooks" onFinish={onFinish}>
+      <Form.Item name="note" label="审核意见" rules={[{ required: true }]}>
+        <TextArea showCount maxLength={100} />
+      </Form.Item>
+    </Form>
     </Modal>
     // <StepsForm
     //   stepsProps={{
