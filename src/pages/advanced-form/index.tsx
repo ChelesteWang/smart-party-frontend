@@ -207,7 +207,7 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
               </Form.Item> */}
               <Form.Item
                 label={<FormattedMessage id="活动负责人" />}
-                name="check"
+                name="leader"
                 rules={[{ required: true, message: '请输入活动负责人' }]}
               >
                 <Input placeholder="请输入活动负责人" />
