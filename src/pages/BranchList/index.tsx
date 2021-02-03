@@ -122,7 +122,7 @@ class TableList extends React.Component {
               >
                 <Meta
                   avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    <Avatar src="https://i.loli.net/2021/02/03/AHobCJGXq4LnNsK.png" />
                   }
                   title={<a href={'/memberList?id='+item.id}>{item.name}</a>}
                   description={item.desc}
