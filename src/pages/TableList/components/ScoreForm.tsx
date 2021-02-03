@@ -1,19 +1,11 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { Form, Input, Button, Select } from 'antd';
-import {
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea,
-  StepsForm,
-  ProFormRadio,
-  ProFormDateTimePicker,
-} from '@ant-design/pro-form';
+import { Form, Input, Button, Slider,Row,Col,InputNumber } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 
 import type { TableListItem } from '../data.d';
 
-export type FormValueType = {
+export type ScoreFormValueType = {
   target?: string;
   template?: string;
   type?: string;
@@ -21,16 +13,15 @@ export type FormValueType = {
   frequency?: string;
 } & Partial<TableListItem>;
 
-export type UpdateFormProps = {
-  onCancel: (flag?: boolean, formVals?: FormValueType) => void;
-  onSubmit: (values: FormValueType) => Promise<void>;
-  updateModalVisible: boolean;
+export type ScoreFormProps = {
+  onCancel: (flag?: boolean, formVals?: ScoreFormValueType) => void;
+  onSubmit: (values: ScoreFormValueType) => Promise<void>;
+  scoreModalVisible: boolean;
   values: Partial<TableListItem>;
 };
-
 const { TextArea } = Input;
 
-const UpdateForm: React.FC<UpdateFormProps> = (props) => {
+const ScoreForm: React.FC<ScoreFormProps> = (props) => {
   const intl = useIntl();
   const [form] = Form.useForm();
 
@@ -40,10 +31,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   
   const [visible, setVisible] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const [cancelLoading, setCancelLoading] = React.useState(false);
-
+  const [score, setScore] = React.useState(0);
   const handleOk = () => {
-    
     setConfirmLoading(true);
     setTimeout(() => {
       setVisible(false);
@@ -54,31 +43,28 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   };
 
   const handleCancel = () => {
-    
-    setCancelLoading(true);
-    setTimeout(() => {
-      setVisible(false);
       props.onCancel();
-      setCancelLoading(false);
-    }, 2000);
   };
 
+  const handleChange = (value:number) => {
+    setScore(value);
+  };
   return (
     <Modal
         width={640}
         bodyStyle={{ padding: '32px 40px 48px' }}
         destroyOnClose
         title={intl.formatMessage({
-          id: 'pages.searchTable.updateForm.ruleConfig',
-          defaultMessage: '活动审批',
+          id: 'pages.searchTable.scoreForm.ruleConfig',
+          defaultMessage: '分数结算',
         })}
-        visible={props.updateModalVisible}
+        visible={props.scoreModalVisible}
         footer={[
-          <Button key="back" loading={cancelLoading} onClick={handleCancel}>
-            驳回
+          <Button key="back" onClick={handleCancel}>
+            取消
           </Button>,
           <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOk}>
-            通过
+            提交
           </Button>,
         ]}
         onCancel={() => {
@@ -86,8 +72,26 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         }}
       >
       <Form form={form} name="control-hooks" onFinish={onFinish}>
-      <Form.Item name="note" label="审核意见">
-        <TextArea showCount maxLength={100} />
+      <Form.Item name="note" label="最终分数">
+        <Row>
+            <Col span={12}>
+            <Slider
+                min={1}
+                max={100}
+                onChange={handleChange}
+                value={typeof score === 'number' ? score : 0}
+            />
+            </Col>
+            <Col span={4}>
+            <InputNumber
+                min={1}
+                max={100}
+                style={{ margin: '0 16px' }}
+                value={score}
+                onChange={handleChange}
+            />
+            </Col>
+        </Row>
       </Form.Item>
     </Form>
     </Modal>
@@ -269,4 +273,4 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   );
 };
 
-export default UpdateForm;
+export default ScoreForm;

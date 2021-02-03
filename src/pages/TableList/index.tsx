@@ -10,8 +10,10 @@ import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
+import ScoreForm from './components/ScoreForm';
 import type { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
+import RenderAuthorized from '@/components/Authorized'
 import './style.less';
 /**
  * 添加节点
@@ -83,7 +85,7 @@ const TableList: React.FC = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   /** 分布更新窗口的弹窗 */
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
-
+  const [scoreModalVisible, handleScoreModalVisible] = useState<boolean>(false);
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
@@ -93,6 +95,8 @@ const TableList: React.FC = () => {
   /** 国际化配置 */
   const intl = useIntl();
 
+  const Authorized = RenderAuthorized("admin")
+  const noMatch = <div></div>;
   const columns: ProColumns<TableListItem>[] = [
     {
       title: (
@@ -280,6 +284,7 @@ const TableList: React.FC = () => {
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
+        <Authorized authority={['admin']} noMatch={noMatch}>
         <a
           key="config"
           onClick={() => {
@@ -288,16 +293,17 @@ const TableList: React.FC = () => {
           }}
         >
           <FormattedMessage id="pages.searchTable.config" defaultMessage="审批" />
-        </a>,
+        </a>&nbsp;&nbsp;
         <a
           key="subscribeAlert"
           onClick={() => {
-            handleUpdateModalVisible(true);
+            handleScoreModalVisible(true);
             setCurrentRow(record);
           }}
         >
           <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="分数结算" />
-        </a>,
+        </a>
+        </Authorized>
       ],
     },
   ];
@@ -314,17 +320,17 @@ const TableList: React.FC = () => {
         search={{
           labelWidth: 120,
         }}
-        toolBarRender={() => [
-          // <Button
-          //   type="primary"
-          //   key="primary"
-          //   onClick={() => {
-          //     handleModalVisible(true);
-          //   }}
-          // >
-          //   <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-          // </Button>,
-        ]}
+        // toolBarRender={() => [
+        //   <Button
+        //     type="primary"
+        //     key="primary"
+        //     onClick={() => {
+        //       handleModalVisible(true);
+        //     }}
+        //   >
+        //     <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+        //   </Button>,
+        // ]}
         request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
         rowSelection={{
@@ -333,6 +339,7 @@ const TableList: React.FC = () => {
           },
         }}
       />
+      <Authorized authority={['admin']} noMatch={noMatch}>
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -341,14 +348,6 @@ const TableList: React.FC = () => {
               <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
               <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
               &nbsp;&nbsp;
-              {/* <span>
-                <FormattedMessage
-                  id="pages.searchTable.totalServiceCalls"
-                  defaultMessage="次数总计"
-                />{' '}
-                {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)}{' '}
-                <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
-              </span> */}
             </div>
           }
         >
@@ -366,7 +365,7 @@ const TableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
-
+      </Authorized>
       <ModalForm
         title={intl.formatMessage({
           id: 'pages.searchTable.createForm.newRule',
@@ -420,7 +419,24 @@ const TableList: React.FC = () => {
         updateModalVisible={updateModalVisible}
         values={currentRow || {}}
       />
-
+      <ScoreForm
+        onSubmit={async () => {
+          const success = true;
+          if (success) {
+            handleScoreModalVisible(false);
+            setCurrentRow(undefined);
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          }
+        }}
+        onCancel={() => {
+          handleScoreModalVisible(false);
+          setCurrentRow(undefined);
+        }}
+        scoreModalVisible={scoreModalVisible}
+        values={currentRow || {}}
+      />
       <Drawer
         width={600}
         visible={showDetail}
