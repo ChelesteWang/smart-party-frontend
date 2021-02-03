@@ -11,21 +11,6 @@ type InternalNamePath = (string | number)[];
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const fieldLabels = {
-  name: '仓库名',
-  url: '仓库域名',
-  owner: '仓库管理员',
-  approver: '审批人',
-  dateRange: '生效日期',
-  type: '仓库类型',
-  name2: '任务名',
-  url2: '任务描述',
-  owner2: '执行人',
-  approver2: '责任人',
-  dateRange2: '生效日期',
-  type2: '任务类型',
-};
-
 const tableData = [
   {
     key: '1',
@@ -80,7 +65,7 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
         <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
           <CloseCircleOutlined className={styles.errorIcon} />
           <div className={styles.errorMessage}>{err.errors[0]}</div>
-          <div className={styles.errorField}>{fieldLabels[key]}</div>
+          {/* <div className={styles.errorField}>{fieldLabels[key]}</div> */}
         </li>
       );
     });
@@ -150,8 +135,9 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
                 rules={[{ required: true, message: '请选择活动类型' }]}
               >
                 <Select placeholder="请选择活动类型">
-                  <Option value="private">私密</Option>
-                  <Option value="public">公开</Option>
+                  <Option value="learn">学习</Option>
+                  <Option value="report">专题报告</Option>
+                  <Option value="socialActivity">社会活动</Option>
                 </Select>
               </Form.Item>
             </Col>
