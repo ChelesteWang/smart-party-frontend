@@ -106,7 +106,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           ]}
         />
       </StepsForm.StepForm>
-      {/* <StepsForm.StepForm
+      <StepsForm.StepForm
         initialValues={{
           target: '0',
           template: '0',
@@ -199,7 +199,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             week: '周',
           }}
         />
-      </StepsForm.StepForm> */}
+      </StepsForm.StepForm>
     </StepsForm>
   );
 };

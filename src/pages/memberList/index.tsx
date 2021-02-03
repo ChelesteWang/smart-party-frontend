@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons';
+// import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Table, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
@@ -8,53 +8,53 @@ import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import type { FormValueType } from './components/UpdateForm';
-import UpdateForm from './components/UpdateForm';
+// import type { FormValueType } from './components/UpdateForm';
+// import UpdateForm from './components/UpdateForm';
 import type { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import { request } from 'express';
+// import { request } from 'express';
 
 /**
  * 添加节点
  *
  * @param fields
  */
-const handleAdd = async (fields: TableListItem) => {
-  const hide = message.loading('正在添加');
-  try {
-    await addRule({ ...fields });
-    hide();
-    message.success('添加成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('添加失败请重试！');
-    return false;
-  }
-};
+// const handleAdd = async (fields: TableListItem) => {
+//   const hide = message.loading('正在添加');
+//   try {
+//     await addRule({ ...fields });
+//     hide();
+//     message.success('添加成功');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('添加失败请重试！');
+//     return false;
+//   }
+// };
 
 /**
  * 更新节点
  *
  * @param fields
  */
-const handleUpdate = async (fields: FormValueType) => {
-  const hide = message.loading('正在配置');
-  try {
-    await updateRule({
-      name: fields.name,
-      // id: fields.id,
-    });
-    hide();
+// const handleUpdate = async (fields: FormValueType) => {
+//   const hide = message.loading('正在配置');
+//   try {
+//     await updateRule({
+//       name: fields.name,
+//       // id: fields.id,
+//     });
+//     hide();
 
-    message.success('配置成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('配置失败请重试！');
-    return false;
-  }
-};
+//     message.success('配置成功');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('配置失败请重试！');
+//     return false;
+//   }
+// };
 
 /**
  * 删除节点
@@ -188,11 +188,6 @@ const TableList: React.FC = () => {
       dataIndex: 'phone',
       sorter: true,
       hideInForm: true,
-      // renderText: (val: string) =>
-      //   `${val}${intl.formatMessage({
-      //     id: 'pages.searchTable.tenThousand',
-      //     defaultMessage: ' 万 ',
-      //   })}`,
     },
     // {
     //   title: (
@@ -394,26 +389,15 @@ const TableList: React.FC = () => {
       <ProTable<TableListItem>
         headerTitle={intl.formatMessage({
           id: 'pages.searchTable.title',
-          defaultMessage: '查询表格',
+          defaultMessage: '党员列表',
         })}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="name"
         search={{
           labelWidth: 120,
         }}
-        toolBarRender={() => [
-          //新建按钮
-          // <Button
-          //   type="primary"
-          //   key="primary"
-          //   onClick={() => {
-          //     handleModalVisible(true);
-          //   }}
-          // >
-          //   <PlusOutlined /> 
-          //   <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-          // </Button>,
-        ]}
+        // toolBarRender={() => [
+        // ]}
         request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
         rowSelection={{
@@ -455,7 +439,7 @@ const TableList: React.FC = () => {
           </Button> */}
         </FooterToolbar>
       )}
-      <ModalForm
+      {/* <ModalForm
         title={intl.formatMessage({
           id: 'pages.searchTable.createForm.newRule',
           defaultMessage: '新建规则',
@@ -472,8 +456,8 @@ const TableList: React.FC = () => {
             }
           }
         }}
-      >
-        <ProFormText
+      > */}
+        {/* <ProFormText
           rules={[
             {
               required: true,
@@ -489,8 +473,8 @@ const TableList: React.FC = () => {
           name="name"
         />
         <ProFormTextArea width="md" name="desc" />
-      </ModalForm>
-      <UpdateForm
+      </ModalForm> */}
+      {/* <UpdateForm
         onSubmit={async (value) => {
           const success = await handleUpdate(value);
           if (success) {
@@ -507,7 +491,7 @@ const TableList: React.FC = () => {
         }}
         updateModalVisible={updateModalVisible}
         values={currentRow || {}}
-      />
+      /> */}
 
       <Drawer
         width={1000}
