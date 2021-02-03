@@ -13,7 +13,8 @@ import UpdateForm from './components/UpdateForm';
 import ScoreForm from './components/ScoreForm';
 import type { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import RenderAuthorized from '@/components/Authorized'
+import RenderAuthorized from '@/components/Authorized';
+import {getAuthority} from '@/utils/authority'
 import './style.less';
 /**
  * 添加节点
@@ -95,7 +96,7 @@ const TableList: React.FC = () => {
   /** 国际化配置 */
   const intl = useIntl();
 
-  const Authorized = RenderAuthorized("admin")
+  const Authorized = RenderAuthorized(getAuthority())
   const noMatch = <div></div>;
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -280,7 +281,7 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
+      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage={getAuthority()=='admin'?"操作":" "} />,
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
