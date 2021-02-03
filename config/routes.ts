@@ -43,6 +43,7 @@
                 name: '党务管理',
                 icon: 'userAdd',
                 path: 'partymanage',
+                authority: ['admin'],
                 routes: [{
                   path: '/',
                   redirect: '/partymember',

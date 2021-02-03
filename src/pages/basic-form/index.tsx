@@ -265,9 +265,11 @@ const BasicForm: FC<BasicFormProps> = (props) => {
               },
             ]}
           >
-            <Select defaultValue="male" style={{ width: 160 }} onChange={handleChange}>
-              <Option value="male">xxx党支部</Option>
-              <Option value="female">xx党支部</Option>
+            <Select defaultValue="ee" style={{ width: 160 }} onChange={handleChange}>
+              <Option value="ee">电子信息系学生支部</Option>
+              <Option value="ce">网络工程系学生支部</Option>
+              <Option value="cs">计算机系学生党支部</Option>
+              <Option value="eee">电子工程系教职工党支部</Option>
             </Select>
           </FormItem>
           </Col>
