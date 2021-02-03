@@ -16,39 +16,41 @@ async function getFakeCaptcha(req: Request, res: Response) {
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   // 支持值为 Object 和 Array
-  'GET /api/currentUser': {
-    name: 'admin',
-    avatar: 'https://avatars.githubusercontent.com/u/40495740?s=460&u=7a6ee7459afd630c262a51c1d44a68a4ba95a07a&v=4',
-    userid: '00000001',
-    tags: [
-      {
-        key: '0',
-        label: '很有想法的',
-      },
-      {
-        key: '1',
-        label: '专注设计',
-      },
-      {
-        key: '2',
-        label: '辣~',
-      },
-      {
-        key: '3',
-        label: '大长腿',
-      },
-      {
-        key: '4',
-        label: '川妹子',
-      },
-      {
-        key: '5',
-        label: '海纳百川',
-      },
-    ],
-    notifyCount: 12,
-    unreadCount: 11,
-    country: 'China',
+  'GET /api/currentUser': async (req: Request, res: Response) => {
+    res.send({
+      name: 'admin',
+      avatar: 'https://avatars.githubusercontent.com/u/40495740?s=460&u=7a6ee7459afd630c262a51c1d44a68a4ba95a07a&v=4',
+      userid: '00000001',
+      tags: [
+        {
+          key: '0',
+          label: '很有想法的',
+        },
+        {
+          key: '1',
+          label: '专注设计',
+        },
+        {
+          key: '2',
+          label: '辣~',
+        },
+        {
+          key: '3',
+          label: '大长腿',
+        },
+        {
+          key: '4',
+          label: '川妹子',
+        },
+        {
+          key: '5',
+          label: '海纳百川',
+        },
+      ],
+      notifyCount: 12,
+      unreadCount: 11,
+      country: 'China',
+    })
   },
   // GET POST 可省略
   'GET /api/users': [
