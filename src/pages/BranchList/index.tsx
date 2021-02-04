@@ -127,7 +127,7 @@ class TableList extends React.Component {
                   title={<a href={'/memberList?id='+item.id}>{item.name}</a>}
                   description={item.desc}
                 />
-              </Card>
+              </Card>                             
             );
           })}
         </Row>
